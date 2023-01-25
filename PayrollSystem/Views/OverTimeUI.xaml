@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="PayrollSystem.Views.OverTimeUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PayrollSystem.Views"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:viewModels="clr-namespace:PayrollSystem.ViewModels" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewModels:OverTimeViewModel/>
+    </UserControl.DataContext>
+    
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="5">
+                    <TextBlock Text="Employee Name:" Margin="5"/>
+                    <ComboBox Margin="5" ItemsSource="{Binding EmployeeListing}" SelectedItem="{Binding SelectedEmployee}" DisplayMemberPath="Fullname" Width="150" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                    <TextBlock Text="DATE:" Margin="5" />
+                    <!--<mah:DateTimePicker Width="150" Margin="5" VerticalAlignment="Top" />-->
+                    <DatePicker Width="150" Margin="5" VerticalAlignment="Top" SelectedDate="{Binding SelectedDate}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                    <TextBlock Text="TIME IN:" Margin="5" />
+                    <mah:TimePicker Width="150" Margin="5" VerticalAlignment="Top" SelectedDateTime="{Binding OtFrom}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                    <TextBlock Text="TIME OUT:" Margin="5"/>
+                    <mah:TimePicker Width="150" Margin="5" VerticalAlignment="Top" SelectedDateTime="{Binding OtTo}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                    <TextBlock Text="REASONS:" Margin="5"/>
+                    <TextBox Width="250" Margin="5" VerticalAlignment="Top" Text="{Binding Reason}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                    <TextBlock Text="Status:" Margin="5"/>
+                    <ComboBox ItemsSource="{Binding StatusCollection}" Width="120" Margin="5" VerticalAlignment="Top" SelectedItem="{Binding SelectedStatus}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                    <Button Margin="5" Content="FILE OVERTIME" VerticalAlignment="Center" Command="{Binding FileOverTimeCommand}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  Text="Search" FontSize="15" Margin="5,25,5,5" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  Text="Start Date:" Margin="5" VerticalAlignment="Center"/>
+                    <DatePicker Margin="5" Width="200" SelectedDate="{Binding SearchDateStart}"/>
+                    <TextBlock  Text="End Date:" Margin="5" VerticalAlignment="Center"/>
+                    <DatePicker Margin="5" Width="200" SelectedDate="{Binding SearchDateEnd}"/>
+                    <Button     Content="Search" Margin="5" Command="{Binding SearchOvertimeCommand}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="6" Margin="5">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Height="500">
+
+                    <ListView ItemsSource="{Binding OvertimeCollection}" SelectedItem="{Binding SelectedOvertime}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="118" Header="Employee No" DisplayMemberBinding="{Binding EmployeeNo}"  />
+                                <GridViewColumn Width="140" Header="Full Name" DisplayMemberBinding="{Binding Fullname}"  />
+                                <GridViewColumn Width="100" Header="Date" DisplayMemberBinding="{Binding DisplayDateOvertime}"  />
+                                <GridViewColumn Width="100" Header="From" DisplayMemberBinding="{Binding DisplayFrom}"  />
+                                <GridViewColumn Width="100" Header="To" DisplayMemberBinding="{Binding DisplayTo}"  />
+                                <GridViewColumn Width="120" Header="Total Minutes" DisplayMemberBinding="{Binding DisplayDurations}"  />
+                                <GridViewColumn Width="300" Header="Reasons" DisplayMemberBinding="{Binding Reasons}"  />
+                                <GridViewColumn Width="120" Header="Status" DisplayMemberBinding="{Binding Status}"  />
+
+
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+
+                                                <Button Background="#FFCF1F1F"
+                                                   Command="{Binding Path = DataContext.DeleteRecordCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl} }}"
+                                                   CommandParameter="{Binding Id}">
+                                                    <materialDesign:PackIcon Kind="Delete" Height="20" Width="20" Foreground="White"/>
+                                                </Button>
+
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </StackPanel>
+        
+        </StackPanel>
+        
+    </Grid>
+</UserControl>

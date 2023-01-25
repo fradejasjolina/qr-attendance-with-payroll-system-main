@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="PayrollSystem.Views.LateMonitoringUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PayrollSystem.Views"
+             xmlns:viewModels="clr-namespace:PayrollSystem.ViewModels">
+    <UserControl.DataContext>
+        <viewModels:LateTrackerViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <StackPanel>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"  Height="550">
+                <ListView ItemsSource="{Binding LateCollection}" SelectedItem="{Binding SelectedManual}" Grid.ColumnSpan="1" VerticalAlignment="Top" Margin="5" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="100" Header="Employee No" DisplayMemberBinding="{Binding EmployeeNo}"  />
+                            <GridViewColumn Width="150" Header="Full Name" DisplayMemberBinding="{Binding Fullname}"  />
+                            <GridViewColumn Width="100" Header="TimeIn" DisplayMemberBinding="{Binding TimeIn}" />
+                            <GridViewColumn Width="100" Header="TimeOut" DisplayMemberBinding="{Binding TimeOut}" />
+                            <GridViewColumn Width="150" Header="LogDate" DisplayMemberBinding="{Binding LogDateDisplay}" />
+                            <GridViewColumn Width="100" Header="Late" DisplayMemberBinding="{Binding LateTotal}" />
+                            <!--<GridViewColumn Width="100" Header="Status" DisplayMemberBinding="{Binding STATUS}" />-->
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</UserControl>

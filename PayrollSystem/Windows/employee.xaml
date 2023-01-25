@@ -131,7 +131,7 @@
             <Button x:Name="button_Copy1" Background="Navy" Foreground="White" Content="DELETE" HorizontalAlignment="Left" Margin="444,3,0,0" Grid.Row="1" VerticalAlignment="Top" Width="74"/>
             <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="6,80,0,0" VerticalAlignment="Top" Width="64"/>
             <ComboBox x:Name="comboBox_Copy" HorizontalAlignment="Left" Margin="100,126,0,0" VerticalAlignment="Top" Width="118"/>
-            <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="342" Margin="-1,20,0,0" Grid.Row="2" VerticalAlignment="Top" Width="784"/>
+            <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="342" Margin="-1,35,0,0" Grid.Row="2" VerticalAlignment="Top" Width="784"/>
         </Grid>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="2">

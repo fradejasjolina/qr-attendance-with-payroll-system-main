@@ -1,0 +1,295 @@
+﻿<UserControl x:Class="PayrollSystem.Views.PayrollUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PayrollSystem.Views"
+             xmlns:viewModel="clr-namespace:PayrollSystem.ViewModels"
+             xmlns:behavior="clr-namespace:PayrollSystem.Behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1300">
+    <UserControl.DataContext>
+        <viewModel:PayrollViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Employee No:" HorizontalAlignment="Right" Width="100"/>
+                        <TextBox Width="130" IsEnabled="False" Text="{Binding PayrollEmployeeNo}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Fullname:" HorizontalAlignment="Right" Width="100"/>
+                        <TextBox Width="130" IsEnabled="False" Text="{Binding PayrollFullName}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Salary:" HorizontalAlignment="Right" Width="100"/>
+                        <TextBox Width="130" IsEnabled="False" Text="{Binding PayrollSalary}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Basic Pay:" HorizontalAlignment="Right" Width="100"/>
+                        <TextBox Width="130" IsEnabled="False" Text="{Binding PayrollBasicPay}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Daily Rate:" HorizontalAlignment="Right" Width="100"/>
+                        <TextBox Width="130" IsEnabled="False" Text="{Binding PayrollDailyRate}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Work Days:"
+                               HorizontalAlignment="Right" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollWorkDays}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Work Amount:" HorizontalAlignment="Right" Width="120"/>
+                        <TextBox Width="130" Text="{Binding PayrollWorkDaysAmount}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Overtime:(mins)" Width="120"/>
+                        <TextBox Width="130" Text="{Binding PayrollOT}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Reg Holiday:(days)" Width="120"/>
+                        <TextBox Width="130" Text="{Binding PayrollRegHol}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Reg Hol OT:(mins)" Width="120"/>
+                        <TextBox Width="130" Text="{Binding PayrollRegHolOT}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Spe Holiday:(mins)" Width="120"/>
+                        <TextBox Width="130" Text="{Binding PayrollSpeHol}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Spe Hol OT:(mins)" Width="120"/>
+                        <TextBox Width="130" Text="{Binding PayrollSpeHolOT}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Weekends(mins):" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollWeekend}"/>
+                    </StackPanel>
+                
+                    <!-- <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Transpo Allowance:" Width="120"/>
+                        <TextBox Width="120" Text="{Binding PayrollTranspoAllowance}"/>
+                    </StackPanel>-->
+               
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Allowance:" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollAllowance}"/>
+                    </StackPanel>
+               
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Absent(mins):" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollAbsent}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Late(mins):" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollLate}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Undertime(mins):" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollUndertime}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Vale:" HorizontalAlignment="Right" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollVale}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="GrossIncome:" HorizontalAlignment="Right" Width="100"/>
+                        <TextBox Width="130" IsEnabled="False" Text="{Binding PayrollGrossIncome}"/>
+                    </StackPanel>
+                
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Philhealth:" HorizontalAlignment="Right" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollPhilhealth}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Pag-Ibig:" HorizontalAlignment="Right" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollPagibig}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="SSS:" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollSSS}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="SssProFund:" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollSssProfund}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="PagibigSalLoan:" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollPagibigSalLoan}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="PagIbigCalLoan:" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollPagIbigCalLoan}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="SssSalaryLoan:" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollSssSalaryLoan}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="SssCalamityLoan:" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollSssCalamityLoan}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Others(-):" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollOthers}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Adjustments(+):" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollAdjustments}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Night Diff:" Width="100"/>
+                        <TextBox Width="130" Text="{Binding PayrollNightTime}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Take Home Pay:" HorizontalAlignment="Right" Width="100"/>
+                        <TextBox Width="130" IsEnabled="False" Text="{Binding PayrollTakeHomePay}"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </StackPanel>
+  
+            <StackPanel Grid.Row="1">
+                <Button Style="{StaticResource FlatButtonStyle}"
+                        Command="{Binding UpdatePayrollCommandAsync}"
+                        Content="Update" HorizontalAlignment="Right" Margin="5"/>
+            </StackPanel>
+
+        </Grid>
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Stretch">
+            <Label HorizontalAlignment="Left" 
+                 Height="23" 
+                Content="{Binding Title}" 
+                 VerticalAlignment="Top" Width="120"/>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Cut-off:" Margin="5,5,10,0"/>
+                    <ComboBox Width="200" ItemsSource="{Binding CutOffs,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding SelectedCutOffIndex}" 
+                          SelectedItem="{Binding SelectedCutOff}" DisplayMemberPath="DisplayDate"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Status:" Margin="5,5,10,0"/>
+                    <ComboBox Width="200" ItemsSource="{Binding StatusCollection}" SelectedValue="{Binding SelectedStatus}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Button Content="Generate Payroll" Margin="5,5,5,0" Background="#FF41A43C" Command="{Binding GeneratePayrollCommandAsync}"/>
+                    <Button Content="Clear" Margin="5,5,5,0"  Command="{Binding CancelSelectionCommand}"/>
+                    <Button Content="Print Payroll" Margin="5,5,5,0" Command="{Binding PrintPayrollAsyncCommand}"/>
+                </StackPanel>
+                
+            </StackPanel>
+            <ListView ItemsSource="{Binding Payrolls,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" 
+                      SelectedItem="{Binding SelectedPayroll}" 
+                      Grid.ColumnSpan="2" 
+                      Grid.Row="2" Margin="5" Background="White"
+                      Height="330" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="100" Header="Employee No" DisplayMemberBinding="{Binding EmployeeNo}"  />
+                        <GridViewColumn Width="150" Header="Full Name" DisplayMemberBinding="{Binding FullName}"  />
+                        <GridViewColumn Width="80" Header="Salary" DisplayMemberBinding="{Binding Salary}"
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding IsSalaryEnabled}"/>
+                        <GridViewColumn Width="100" Header="Basic Pay" DisplayMemberBinding="{Binding BasicPay}" 
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding IsBasicPayEnabled}"/>
+                        <GridViewColumn Width="100" Header="Daily Rate" DisplayMemberBinding="{Binding DailyRate}"
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding IsDailyRateEnabled}"/>
+                        <GridViewColumn Width="160" Header="Work Days(Amount)" 
+                                        DisplayMemberBinding="{Binding WorkDaysAmount}" 
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding IsWorkDaysAmountEnabled}"/>
+                        <GridViewColumn Width="160" Header="Overtime(Amount)" 
+                                        DisplayMemberBinding="{Binding WorkOvertimeAmount}"
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding IsOvertimeEnabled}"/>
+                        <GridViewColumn Width="195" Header="Regular Holiday(Amount)" 
+                                        DisplayMemberBinding="{Binding RegularHolidayAmount}"
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding IsRegularHolidayAmountEnabled}"/>
+                        <GridViewColumn Width="250" Header="Regular Holiday(OT Mins Amount)" 
+                                        DisplayMemberBinding="{Binding TotalRegularHolidayAmount}"
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding IsRegularHolidayOtMinsAmountEnabled}"/>
+                        <GridViewColumn Width="195" Header="Special Holiday(Amount)" 
+                                        DisplayMemberBinding="{Binding SpecialHolidayAmount}"
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding IsSpecialHolidayAmountEnabled}"/>
+                        <GridViewColumn Width="250" Header="Special Holiday(OT Mins Amount)" 
+                                        DisplayMemberBinding="{Binding OtSpecialHolidayAmount}"
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding IsSpecialHolidayOtMinsAmountEnabled}"/>
+                        <GridViewColumn Width="230" Header="Saturday/Sunday Duty(Amount)" 
+                                        DisplayMemberBinding="{Binding WeekendDutyAmount}"
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding IsSaturdaySundayDutyAmountEnabled}"/>
+                        <GridViewColumn Width="150" Header="Transpo Allowance" 
+                                        DisplayMemberBinding="{Binding TranspoAllowance}"
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding IsTranspoAllowanceEnabled}"/>
+                        <GridViewColumn Width="105" Header="Allowance" DisplayMemberBinding="{Binding Allowance}"
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding IsAllowanceEnabled}"/>
+                        <GridViewColumn Width="105" Header="Absent" DisplayMemberBinding="{Binding AbsentAmount}"/>
+                        <GridViewColumn Width="105" Header="Late" DisplayMemberBinding="{Binding MinutesAmount }"/>
+                        <GridViewColumn Width="115" Header="Undertime" DisplayMemberBinding="{Binding UndertimeAmount}"/>
+                        <GridViewColumn Width="70" Header="Vale" DisplayMemberBinding="{Binding Vale}" />
+                        <GridViewColumn Width="150" Header="Gross Income" 
+                                        DisplayMemberBinding="{Binding GrossIncome}" 
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="True"/>
+                        <GridViewColumn Width="115" Header="Philhealth" 
+                                        DisplayMemberBinding="{Binding PhilhealthContribution}" 
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding ThirtyDisplay,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <GridViewColumn Width="100" Header="Pag-Ibig" 
+                                        DisplayMemberBinding="{Binding PagIbigContribution}"
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding ThirtyDisplay,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <GridViewColumn Width="100" Header="SSS" 
+                                        DisplayMemberBinding="{Binding SssContribution }" 
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding FiftheenDisplay,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <GridViewColumn Width="160" Header="SSS Provident Fund" 
+                                        DisplayMemberBinding="{Binding SssProvidentFund}"
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="True"/> 
+                        <GridViewColumn Width="160" Header="Pag-ibig Salary Loan" 
+                                        DisplayMemberBinding="{Binding PagibigSalaryLoan}" 
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="True"/> 
+                        <GridViewColumn Width="170" Header="Pag-Ibig Calamity Loan" 
+                                        DisplayMemberBinding="{Binding PagibigCalamityLoan }"
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="True"/> 
+                        <GridViewColumn Width="155" Header="SSS Salary Loan" 
+                                        DisplayMemberBinding="{Binding SssSalaryLoan }" 
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="True"/>
+                        <GridViewColumn Width="150" Header="SSS Calamity Loan" 
+                                        DisplayMemberBinding="{Binding SssCalamityLoan}" 
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="True"/>
+                        <GridViewColumn Width="80" Header="Others" DisplayMemberBinding="{Binding Others}" 
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="True"/>
+                        <GridViewColumn Width="130" Header="Adjustment" DisplayMemberBinding="{Binding Adjustments}" />
+                       
+                        <GridViewColumn Width="160" Header="Night Diff" 
+                                        DisplayMemberBinding="{Binding NightTimeAmount}" 
+                                        behavior:GridViewColumnVisibilityManager.IsVisible="{Binding NightTimeAmount}"/>
+
+                        <GridViewColumn Width="130" Header="Total Salary" DisplayMemberBinding="{Binding TotalSalary}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</UserControl>

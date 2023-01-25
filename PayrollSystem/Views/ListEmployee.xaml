@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="PayrollSystem.Views.ListEmployee"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:behaviors="clr-namespace:PayrollSystem.Behaviors"
+             >
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <TextBox Margin="5" Width="300" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Search..."
+                     Text="{Binding SearchEmployeeText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                     />
+            <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Height="335">
+                <ListView ItemsSource="{Binding Employees}" 
+                  SelectedItem="{Binding SelectedEmployee}"
+                  Grid.ColumnSpan="2" Grid.Row="2" Margin="5" 
+                          ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="120" Header="Employee No"
+                                            DisplayMemberBinding="{Binding EmployeeNo}"  />
+                            <GridViewColumn Width="140" Header="Full Name" DisplayMemberBinding="{Binding Fullname}"  />
+                            <GridViewColumn Width="83" Header="Gender"   DisplayMemberBinding="{Binding Gender}" />
+                            <GridViewColumn Width="95" Header="Birthdate" DisplayMemberBinding="{Binding DisplayBirthDate}" />
+                            <GridViewColumn Width="480" Header="Address" DisplayMemberBinding="{Binding Address}" />
+                            <GridViewColumn Width="160" Header="Position" DisplayMemberBinding="{Binding Position}" />
+                            <GridViewColumn Width="110" Header="Hiring Date" DisplayMemberBinding="{Binding DisplayHiringDate}" />
+
+                            <GridViewColumn >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Button Content="Print Record"
+                                                   Command="{Binding Path = DataContext.PrintEmployeeRecordCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl} }}"
+                                                   CommandParameter="{Binding EmployeeNo}"/>
+
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+            
+        </StackPanel>
+    </Grid>
+</UserControl>

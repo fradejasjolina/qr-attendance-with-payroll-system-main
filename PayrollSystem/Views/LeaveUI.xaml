@@ -1,0 +1,136 @@
+﻿<UserControl x:Class="PayrollSystem.Views.LeaveUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PayrollSystem.Views"
+             xmlns:vm="clr-namespace:PayrollSystem.ViewModels"
+             xmlns:map="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <vm:LeaveViewModel/>
+    </UserControl.DataContext>
+    
+    <Grid>
+        <TabControl Margin="5">
+            <TabItem Header="Filing Leaves">
+               
+                <StackPanel>
+                    <!--<TextBlock Text="Leaves" FontSize="30"/>-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Margin="5">
+                            <TextBlock Text="Employee Name:"/>
+                            <ComboBox ItemsSource="{Binding Employees}" DisplayMemberPath="Fullname" 
+                              SelectedItem="{Binding SelectedEmployee,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                              />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="5">
+                            <TextBlock Text="Department:" />
+                            <ComboBox Margin="0,5,0,0" ItemsSource="{Binding Departments}" SelectedItem="{Binding Department}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Margin="5">
+                            <TextBlock Text="Date Filed:"/>
+                            <DatePicker Margin="5" SelectedDate="{Binding DateFiled}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="3" Margin="5">
+                            <TextBlock Text="Type of Leave:"/>
+                            <ComboBox Margin="5" ItemsSource="{Binding LeaveTypes}" SelectedItem="{Binding SelectedLeave}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="4" Margin="5">
+                            <TextBlock Text="Reasons/Date of Leave:"/>
+                            <TextBox Margin="5" Text="{Binding Remarks}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="5" Margin="5">
+                            <TextBlock Text="Leave Status:"/>
+                            <ComboBox Margin="5" ItemsSource="{Binding LeaveStatusCollection}" SelectedItem="{Binding SelectedLeaveStatus}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.ColumnSpan="4" Margin="5">
+                            <TextBox Margin="5" materialDesign:HintAssist.Hint="Search" Text="{Binding SearchText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Margin="5" Grid.Column="5">
+                            <Button Content="{Binding ButtonText}" Command="{Binding SaveLeaveCommand}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Grid.ColumnSpan="6" Margin="5">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Height="500">
+                                <ListView ItemsSource="{Binding LeavesCollection}" SelectedItem="{Binding SelectedEmployeeLeave}"  Margin="5">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Width="120" Header="Employee No" DisplayMemberBinding="{Binding EmployeeNo}"/>
+                                            <GridViewColumn Width="200" Header="Employee Name" DisplayMemberBinding="{Binding Fullname}"/>
+                                            <GridViewColumn Width="120" Header="Date Filed" DisplayMemberBinding="{Binding DisplayDateFiled}"/>
+                                            <GridViewColumn Width="180" Header="Department" DisplayMemberBinding="{Binding Department}"/>
+                                            <GridViewColumn Width="200" Header="Type of Leave" DisplayMemberBinding="{Binding LeaveType}"/>
+                                            <GridViewColumn Width="400" Header="Remarks/Date of Leave" DisplayMemberBinding="{Binding Remarks}" />
+                                            <GridViewColumn Width="120" Header="Status" DisplayMemberBinding="{Binding Status}" />
+                                            <GridViewColumn>
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel>
+
+                                                            <Button Background="#FFCF1F1F"
+                                                   Command="{Binding Path = DataContext.DeleteRecordCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl} }}"
+                                                   CommandParameter="{Binding Id}">
+                                                                <materialDesign:PackIcon Kind="Delete" Height="20" Width="20" Foreground="White"/>
+                                                            </Button>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </ScrollViewer>
+                        </StackPanel>
+                            
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Available Leaves">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock Text="Employee Name:" Margin="5"/>
+                        <ComboBox ItemsSource="{Binding Employees}" SelectedItem="{Binding EmployeeLeaveSelected}" DisplayMemberPath="Fullname" Width="200"/>
+                    </StackPanel>
+                  
+                    <StackPanel Margin="5">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Height="600">
+                            <ListView ItemsSource="{Binding EmployeeLeaves}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Width="120" Header="Employee No" DisplayMemberBinding="{Binding EmployeeNo}"/>
+                                        <GridViewColumn Width="200" Header="Employee Name" DisplayMemberBinding="{Binding Fullname}"/>
+                                        <GridViewColumn Width="200" Header="Leave Count"  DisplayMemberBinding="{Binding LeaveCount}"/>
+                                        <GridViewColumn Width="200" Header="Current Leave"  DisplayMemberBinding="{Binding CurrentLeave}"/>
+                                        <GridViewColumn Width="200" Header="Date Hired" DisplayMemberBinding="{Binding DisplayDateFiled}"/>
+                                        <GridViewColumn Width="200" Header="Years of Service" DisplayMemberBinding="{Binding YearsOfService}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </ScrollViewer>
+                    </StackPanel>
+                </StackPanel>
+                
+                
+               
+            </TabItem>
+        </TabControl>
+        
+       
+    </Grid>
+</UserControl>

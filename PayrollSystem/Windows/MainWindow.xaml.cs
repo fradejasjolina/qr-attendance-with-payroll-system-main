@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ControlzEx.Theming;
+using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,17 +20,14 @@ namespace PayrollSystem
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            InitializeComponent();
-            this.DataContext = this;
+            var theme = new Theme("CustomLightRed", "CustomLightRed", "Light", "Blue", Colors.Navy, Brushes.Navy, true, false);
+            ThemeManager.Current.AddTheme(theme);
+            ThemeManager.Current.ChangeTheme(this, theme);
         }
     }
 }

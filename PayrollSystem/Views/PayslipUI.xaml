@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="PayrollSystem.Views.PayslipUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PayrollSystem.Views"
+             xmlns:vm="clr-namespace:PayrollSystem.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <UserControl.DataContext>
+        <vm:PayslipViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <StackPanel>
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="5" >
+                    <TextBlock Text="Cut offs:" Margin="5" VerticalAlignment="Center"/>
+                    <ComboBox Width="300" ItemsSource="{Binding CutOffList}" SelectedItem="{Binding SelectedCutOff}" 
+                              SelectedIndex="{Binding SelectedCutOffIndex}" DisplayMemberPath="DisplayDate" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Search:" Margin="5" VerticalAlignment="Center"/>
+                    <TextBox Width="200" materialDesign:HintAssist.Hint="Search Employee" Text="{Binding SearchEmployeeText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <!--<StackPanel Orientation="Horizontal" Margin="5" >
+                    <TextBlock Text="Status:" Margin="5" VerticalAlignment="Center"/>
+                    <ComboBox Width="150" ItemsSource="{Binding StatusCollection}" SelectedItem="{Binding SelectedStatus}" DisplayMemberPath="DisplayDate" Margin="5"/>
+                </StackPanel>-->
+
+            </StackPanel>
+            <ScrollViewer Height="600">
+                <ListView ItemsSource="{Binding PayrollList}" Grid.ColumnSpan="1" VerticalAlignment="Top" Margin="5" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="100" Header="Employee No" DisplayMemberBinding="{Binding EmployeeNo}" />
+                            <GridViewColumn Width="150" Header="Employee Name" DisplayMemberBinding="{Binding FullName}" />
+                            <GridViewColumn Width="150" Header="Gross Income" DisplayMemberBinding="{Binding GrossIncome}" />
+                             <GridViewColumn Width="120" Header="Total Salary" DisplayMemberBinding="{Binding TotalSalary}" />
+                            <GridViewColumn >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Button Content="Print Payslip"  
+                                       Command="{Binding Path = DataContext.PrintPayslipCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl} }}"
+                                       CommandParameter="{Binding EmployeeNo}"/>
+ 
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                             </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+ 
+
+        </StackPanel>
+      </Grid> 
+</UserControl>
+     

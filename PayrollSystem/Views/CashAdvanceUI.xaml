@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="PayrollSystem.Views.CashAdvanceUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PayrollSystem.Views"
+             xmlns:viewModel="clr-namespace:PayrollSystem.ViewModels"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewModel:CashAdvanceViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <TabControl>
+            <TabItem Header="Filing of Cash Advance">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <StackPanel Margin="5">
+                            <TextBlock Text="Employee Name:"/>
+                            <ComboBox Width="200" ItemsSource="{Binding EmployeeList}" SelectedItem="{Binding SelectedEmployeeFiling}" DisplayMemberPath="Fullname"/>
+                        </StackPanel>
+                        <StackPanel Margin="5">
+                            <TextBlock Text="Amount:"/>
+                            <TextBox Width="100" Text="{Binding FilingAmount}" />
+                        </StackPanel>
+                        <StackPanel Margin="5">
+                            <TextBlock Text="Status:"/>
+                            <ComboBox Width="120" SelectedItem="{Binding SelectedStatus}" ItemsSource="{Binding StatusCollection}"/>
+                        </StackPanel>
+                        <StackPanel Margin="5">
+                            <Button Content="File Cash Advance" Command="{Binding FileCashAdvanceCommand}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="{Binding RemainingBalanceText}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <ScrollViewer Height="550">
+                        <ListView ItemsSource="{Binding FilingCashAdvancesCollection}" SelectedItem="{Binding FilingCashAdvancesSelected}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="120" Header="Employee No" DisplayMemberBinding="{Binding EmployeeNo}"  />
+                                    <GridViewColumn Width="200" Header="Full Name" DisplayMemberBinding="{Binding EmployeeName}"  />
+                                    <GridViewColumn Width="100" Header="Amount"   DisplayMemberBinding="{Binding Amount}" />
+                                    <GridViewColumn Width="150" Header="Date Filed" DisplayMemberBinding="{Binding DateFiled}" />
+                                    <GridViewColumn Width="120" Header="Status" DisplayMemberBinding="{Binding Status}" />
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+
+                                                    <Button Background="#FFCF1F1F"
+                                                   Command="{Binding Path = DataContext.DeleteRecordCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl} }}"
+                                                   CommandParameter="{Binding Id}">
+                                                        <materialDesign:PackIcon Kind="Delete" Height="20" Width="20" Foreground="White"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
+                </StackPanel>                                
+            </TabItem>
+            <TabItem Header="List Cash Advance" Visibility="{Binding ListCashAdvanceVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <StackPanel Orientation="Vertical">
+                    <!--<StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <TextBlock Text="Employee Name:" Width="100" />
+                        <ComboBox Width="300" ItemsSource="{Binding EmployeeNames}"
+                          DisplayMemberPath="FullName" SelectedItem="{Binding SelectedEmployee}"/>
+                    </StackPanel>
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <TextBlock Text="Amount:"  Width="100"  />
+                        <TextBox Width="300" Text="{Binding Amount}"/>
+                    </StackPanel>
+                    <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Save" Margin="5" Command="{Binding SaveCashAdvanceCommand}"/>
+                        <Button Content="Delete" Background="Red" Margin="5" Command="{Binding DeleteCashAdvanceCommand}"/>
+                    </StackPanel>-->
+                    <TextBox materialDesign:HintAssist.Hint="Search..." Text="{Binding TextSearch,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                    <StackPanel>
+                        <ScrollViewer Height="550">
+                            <ListView ItemsSource="{Binding CashAdvances}" SelectedItem="{Binding SelectedCashAdvance}" HorizontalContentAlignment="Center">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Width="120" Header="Employee No" DisplayMemberBinding="{Binding EmployeeNo}"  />
+                                        <GridViewColumn Width="250" Header="Fullname" DisplayMemberBinding="{Binding FullName}"  />
+                                        <GridViewColumn Width="200" Header="Cash Advance Amount" DisplayMemberBinding="{Binding Amount}"  />
+                                        <GridViewColumn Width="200" Header="Remaining Balance"  DisplayMemberBinding="{Binding RemainingBalance}"  />
+                                        <GridViewColumn Width="120" Header="Date Added" DisplayMemberBinding="{Binding DateAdded}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </ScrollViewer>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Cash Advance Tracker" Visibility="{Binding ListCashAdvanceVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel>
+                        <TextBox materialDesign:HintAssist.Hint="Search.." Text="{Binding TrackerSearch,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <ScrollViewer Height="550">
+                            <ListView ItemsSource="{Binding CashAdvancesTracker}" HorizontalContentAlignment="Center">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Width="120" Header="Employee No" DisplayMemberBinding="{Binding EmployeeNo}"  />
+                                        <GridViewColumn Width="250" Header="Fullname" DisplayMemberBinding="{Binding FullName}"  />
+                                        <GridViewColumn Width="200" Header="Payroll Date" DisplayMemberBinding="{Binding PayrollDate}"  />
+                                        <GridViewColumn Width="200" Header="Amount"  DisplayMemberBinding="{Binding Amount}"  />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </ScrollViewer>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            
+            
+        </TabControl>
+        
+        
+    </Grid>
+</UserControl>

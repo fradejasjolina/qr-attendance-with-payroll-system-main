@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="PayrollSystem.Views.Dashboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PayrollSystem.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls">
+    <Grid Background="White">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Background="Navy" Height="50" Margin="0,0,0,15">
+                <Label Content="DASHBOARD" 
+                       VerticalAlignment="Center"
+                            FontFamily="Verdana" FontWeight="Bold" Foreground="WHITE" 
+                           FontSize="16" HorizontalAlignment="Left"  Margin="0,10,0,0"/>
+            </StackPanel>
+            <ListView ItemsSource="{Binding DashboardMenu}" SelectedItem="{Binding SelectedMenu}" Foreground="Black" >
+                <dxmvvm:Interaction.Behaviors>
+                    <dxmvvm:EventToCommand EventName="SelectionChanged" Command="{Binding DashboardSelectionCommandAsync}" 
+                                           PassEventArgsToCommand="True" />
+                </dxmvvm:Interaction.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Grid.Column="0" Height="20" Kind="{Binding Kind}"/>
+                            <TextBlock  Grid.Column="1" Margin="13,0,0,0" Height="30" Text="{Binding Title}"/>
+                            <!--<Grid.ToolTip>
+                                <ToolTip Placement="Right" ToolTipService.ShowDuration="20000">
+                                    <Grid>
+                                        <Button Content="hello"/>
+                                    </Grid>
+                                </ToolTip>
+                            </Grid.ToolTip>-->
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</UserControl>
